@@ -6,19 +6,20 @@
         android:id="@+id/menuPesquisa"
         android:title="@string/pesquisar"
         android:icon="@drawable/ic_search_icon"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/menuConfiguracoes"
         android:title="@string/configuracoes"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menuSair"
         android:title="@string/sair"
         app:showAsAction="never"
+
         />
+
 
 </menu>

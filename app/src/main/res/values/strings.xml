@@ -7,4 +7,7 @@
     <string name="pesquisar">Pesquisar</string>
     <string name="configuracoes">Configurações</string>
     <string name="sair">Sair</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="st_description">Esse não é seu nome de usuário nem sua senha. Esse nome ficará visivel para seus contatos do WhatsApp.</string>
 </resources>

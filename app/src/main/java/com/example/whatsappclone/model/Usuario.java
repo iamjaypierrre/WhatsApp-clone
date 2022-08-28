@@ -1,6 +1,15 @@
 package com.example.whatsappclone.model;
 
+import android.provider.ContactsContract;
+
+import com.example.whatsappclone.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
 public class Usuario {
+
+
+    private String uid;
     private String nome;
     private String email;
     private String senha;
@@ -8,7 +17,25 @@ public class Usuario {
     public Usuario() {
     }
 
+    public void salvar(){
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
+        DatabaseReference usuario = firebaseRef.child("usuarios").child(getUid());
+
+        usuario.setValue(this);
+    }
+
+    @Exclude
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public String getNome() {
+
+
         return nome;
     }
 
@@ -24,6 +51,7 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }

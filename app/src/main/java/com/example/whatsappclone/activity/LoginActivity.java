@@ -20,16 +20,21 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText campoEmail, campoSenha;
     private FirebaseAuth autenticacao;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mAuth = FirebaseAuth.getInstance();
+
 
         campoEmail = findViewById(R.id.editLoginEmail);
         campoSenha = findViewById(R.id.editLoginSenha);
@@ -77,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
         String textoSenha = campoSenha.getText().toString();
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAuthentication();
+        mAuth = FirebaseAuth.getInstance();
+
 
         //Validar se email ou senha foram digitados
         if (!textoEmail.isEmpty()) {//verifica o email
@@ -99,8 +106,18 @@ public class LoginActivity extends AppCompatActivity {
                     "Preencha seu o email!",
                     Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            abrirTelaPrincipal();
+        }
+    }
 
     public void abrirTelaCadastro(View view) {
         Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);

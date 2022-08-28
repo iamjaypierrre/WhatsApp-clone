@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.whatsappclone.R;
 import com.example.whatsappclone.config.ConfiguracaoFirebase;
+import com.example.whatsappclone.helper.Base64Custom;
 import com.example.whatsappclone.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,10 +46,26 @@ public class CadastroActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if ( task.isSuccessful() ){
+
+                    try{
+
+                    String identificadorUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                    usuario.setUid(identificadorUsuario);
+                    usuario.salvar();
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+
                     Toast.makeText(CadastroActivity.this,
                             "Sucesso ao cadastrar usuario!",
                             Toast.LENGTH_SHORT).show();
                     finish();
+
+
+
                 }else{
 
                     String excecao = "";
